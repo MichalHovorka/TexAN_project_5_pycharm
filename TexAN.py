@@ -143,31 +143,44 @@ print('Součet všech čísel (ne cifer) ve vybraném článku: '+ str(soucet_ci
 
 print('-' *100)
 
-#graf
-pocet = [len(i) for i in t_sup]
+# graf
+# pocet = [len(i) for i in t_sup]
 
-[[x,pocet.count(x)] for x in set(pocet)]
-[['a', 1], ['b', 2]]
-slo = dict((x,pocet.count(x)) for x in set(pocet))
+# [[x,pocet.count(x)] for x in set(pocet)]
+# [['a', 1], ['b', 2]]
+# slo = dict((x,pocet.count(x)) for x in set(pocet))
 
-print( '=' *100 )
-print('LEN | OCCURENCES         | NR.' )
-print( '=' *100 )
-print(' 1  | ------------------ |' + ' ' + str(slo.get(1))  )
-print(' 2  | ------------------ |' + ' ' + str(slo.get(2))  )
-print(' 3  | ------------------ |' + ' ' + str(slo.get(3))  )
-print(' 4  | ------------------ |' + ' ' + str(slo.get(4))  )
-print(' 5  | ------------------ |' + ' ' + str(slo.get(5))  )
-print(' 6  | ------------------ |' + ' ' + str(slo.get(6))  )
-print(' 7  | ------------------ |' + ' ' + str(slo.get(7))  )
-print(' 8  | ------------------ |' + ' ' + str(slo.get(8))  )
-print(' 9  | ------------------ |' + ' ' + str(slo.get(9))  )
-print('10  | ------------------ |' + ' ' + str(slo.get(10)) )
-print('11  | ------------------ |' + ' ' + str(slo.get(11)) )
-print('12  | ------------------ |' + ' ' + str(slo.get(12)) )
-print('13  | ------------------ |' + ' ' + str(slo.get(13)) )
-print('14  | ------------------ |' + ' ' + str(slo.get(14)) )
-print('15  | ------------------ |' + ' ' + str(slo.get(15)) )
-print('16  | ------------------ |' + ' ' + str(slo.get(16)) )
+podle_delky = dict()
+for slovo in text:
+    for rozmezi in range(30):
+        if len(slovo) == rozmezi:
+            podle_delky[str(rozmezi)] = podle_delky.setdefault(str(rozmezi), 0) + 1
 
-print( '=' *100 )
+# výpis rozdělení
+# print("Počet slov v textu je: " + str(len(rozdelena)))
+# print("Počet slov s velkým prvním písmenem: " + str((len(velke))))
+# print("Počet slov psaných malým písmem: " + str((len(mala))))
+# print("Počet slov psaných velkým písmem: " + str((len(velka))))
+# print("Počet čísel: " + str((len(cisla))))
+# print("Součet všech čísel: " + str(sum(cisla)))
+# print(predel)
+# klice na cisla
+
+klice = list(podle_delky.keys())
+for i in range(0, len(klice)):
+    klice[i] = int(klice[i])
+klice.sort(reverse=True)
+
+# tabulka
+
+vyskyt = "             Výskyt              "
+print("Délka|" + vyskyt + "|Počet")
+print('=' * 50)
+for cislovani in range(1, (klice[0] + 1)):
+    mezirka = int((4 - len(str(cislovani)))) * " "
+    if cislovani in klice:
+        print(cislovani, mezirka + "|", podle_delky.get(str(cislovani)) \
+              * "*", ((len(vyskyt) - 3) - podle_delky.get(str(cislovani))) \
+              * " " + " |", podle_delky.get(str(cislovani)))
+
+print('=' * 100)
